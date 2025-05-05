@@ -91,6 +91,6 @@ Este proyecto está bajo la **Licencia MIT**. Consulta el archivo [LICENSE](LICE
 
 
 ```
-Ayudame un poco loco. 
-```[![Patrociname❤️](https://img.shields.io/badge/Patrocinar-%E2%9D%A4-FE0000?logo=github)](https://github.com/sponsors/juan467567756)
+Ayudame un poco loco.  [![Patrociname❤️](https://img.shields.io/badge/Patrocinar-%E2%9D%A4-FE0000?logo=github)](https://github.com/sponsors/juan467567756)
 
+```  
