@@ -2,17 +2,19 @@ cmake_minimum_required(VERSION 3.10)
 project(DDF)
 set(CMAKE_CXX_STANDARD 17)
 
-# Código fuente
-file(GLOB SRC "src/*.cpp")
-
-# --- Habilitar flags de cobertura si se pide ---
+# --- Habilitar cobertura de código ---
 option(CODE_COVERAGE "Enable coverage reporting" ON)
 if (CODE_COVERAGE)
   if (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-    add_compile_options(-O0 -g --coverage)
+    message(STATUS "Building with coverage flags")
+    add_compile_options(--coverage -O0 -g)
     add_link_options(--coverage)
   endif()
 endif()
+
+# Código fuente
+file(GLOB SRC "src/*.cpp")
+add_executable(ddf ${SRC})
 
 # Ejecutable principal
 add_executable(ddf ${SRC})
