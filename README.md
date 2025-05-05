@@ -77,13 +77,7 @@ DDF (Diagram Definition Format) es una herramienta en C++17 para convertir un DS
 ### Instalación
 1. Clona el repositorio:  
    `git clone https://github.com/juan467567756/DDF.git`  
-2. Entra en la carpeta e inicializa submódulos:  
-   `cd DDF && git submodule update --init --recursive`  
-3. Compila:  
-   - Crea y entra en build: `mkdir build && cd build`  
-   - Configura y compila:  
-     `cmake -DCODE_COVERAGE=OFF ..`  
-     `cmake --build . --config Release`
+ :)
 
 ### Uso
 - **ASCII (por defecto)**  
