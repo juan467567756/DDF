@@ -25,8 +25,7 @@ jobs:
 
       - name: Run static analysis
         run: |
-          cppcheck --enable=all --inconclusive \
-            --suppress=missingIncludeSystem --suppress=missingInclude src || true
+          cppcheck --enable=all --inconclusive --suppress=missingIncludeSystem --suppress=missingInclude src || true
           clang-tidy src/*.cpp -- -I src
 
       - name: Configure and build with coverage
@@ -36,7 +35,7 @@ jobs:
           cmake -DCODE_COVERAGE=ON ..
           make
 
-      - name: Run unit tests (core & parser)
+      - name: Run unit and semantic tests
         run: |
           cd build
           ctest --output-on-failure
@@ -44,7 +43,7 @@ jobs:
       - name: Capture coverage data
         run: |
           cd build
-          # Capture coverage; ignore empty data sets
+          # Capture coverage; ignore if no data generated
           lcov --directory . --capture --output-file coverage.info --ignore-errors empty || true
           lcov --remove coverage.info '/usr/*' 'extern/*' --output-file coverage.info || true
           lcov --list coverage.info || true
