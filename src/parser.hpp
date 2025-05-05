@@ -15,7 +15,7 @@ struct ParserError : std::runtime_error {
     {}
 };
 
-// Declara tu función parse (ajusta firma si era distinta)
-std::vector<std::unique_ptr<Node>> parse(std::istream& in);
+// Firma de la función que construye el AST
+AST parseProgram(std::istream& in);
 
 #endif // DDF_PARSER_HPP
