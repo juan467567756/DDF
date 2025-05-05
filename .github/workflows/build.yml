@@ -1,0 +1,24 @@
+name: Build & Test DDF
+
+# Se ejecuta en cada push o pull request a main
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Compile sources
+        run: g++ src/main.cpp src/utils.cpp -o ddf
+
+      - name: Smoke test
+        # Ejecuta el parser con un mini‑script para verificar que funciona
+        run: |
+          echo -e "BOX A\nARROW\nBOX B" | ./ddf
