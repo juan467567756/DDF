@@ -31,10 +31,20 @@ DDF es una herramienta de línea de comandos que convierte un mini‑lenguaje de
 
 ## Tecnologías
 
-* **Lenguaje**: C++17
-* **Compilador**: g++ (GCC)
-* **CI**: GitHub Actions
-* **Soporte**: Linux, macOS, Windows (Git Bash)
+## Tecnologías
+
+- **Lenguaje**: C++17  
+- **Sistema de build**: CMake (con soporte a flags de cobertura)  
+- **Tests unitarios**: GoogleTest  
+- **Análisis estático**: cppcheck, clang-tidy  
+- **Integración continua**: GitHub Actions  
+  - Build, tests, cobertura con lcov  
+  - Publicación de cobertura en Codecov  
+  - Construcción y smoke-test de imagen Docker  
+- **Cobertura de código**: lcov + Codecov  
+- **Contenerización**: Docker multi-stage  
+- **Visualización**: Graphviz (`.dot`)  
+- **Documentación viva**: GitHub Pages (directorio `docs/`)  
 
 ## Instalación
 
