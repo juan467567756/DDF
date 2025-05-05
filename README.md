@@ -89,5 +89,8 @@ ddf --help
 
 Este proyecto está bajo la **Licencia MIT**. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
-ayudame un poco loco [![❤️](https://img.shields.io/badge/Patrocinar-%E2%9D%A4-FE0000?logo=github)](https://github.com/sponsors/juan467567756)
+
+```
+Ayudame un poco loco. 
+```[![Patrociname❤️](https://img.shields.io/badge/Patrocinar-%E2%9D%A4-FE0000?logo=github)](https://github.com/sponsors/juan467567756)
 
