@@ -1,6 +1,5 @@
 name: Build & Test DDF
 
-# Se ejecuta en cada push o pull request a main
 on:
   push:
     branches: [ main ]
@@ -12,13 +11,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Compile sources
-        run: g++ src/main.cpp src/utils.cpp -o ddf
+      - name: Setup CMake
+        run: sudo apt-get update && sudo apt-get install -y cmake
 
-      - name: Smoke test
-        # Ejecuta el parser con un mini‑script para verificar que funciona
+      - name: Build with CMake
         run: |
-          echo -e "BOX A\nARROW\nBOX B" | ./ddf
+          mkdir build && cd build
+          cmake ..
+          make
+
+      - name: Run tests
+        run: |
+          cd build
+          ctest --verbose
