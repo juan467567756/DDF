@@ -5,10 +5,10 @@ set(CMAKE_CXX_STANDARD 17)
 # Código fuente
 file(GLOB SRC "src/*.cpp")
 
-# Si estamos en modo Coverage, activa flags
-option(CODE_COVERAGE \"Enable coverage reporting\" ON)
-if(CODE_COVERAGE)
-  if (CMAKE_CXX_COMPILER_ID MATCHES \"GNU|Clang\")
+# --- Habilitar flags de cobertura si se pide ---
+option(CODE_COVERAGE "Enable coverage reporting" ON)
+if (CODE_COVERAGE)
+  if (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     add_compile_options(-O0 -g --coverage)
     add_link_options(--coverage)
   endif()
