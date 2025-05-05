@@ -1,12 +1,21 @@
-#pragma once
-#include "ast.hpp"
-#include <istream>
-#include <stdexcept>
+#ifndef DDF_PARSER_HPP
+#define DDF_PARSER_HPP
 
-// Excepción para errores de sintaxis
+#include <stdexcept>
+#include <string>
+#include <istream>
+#include <vector>
+#include <memory>
+#include "ast.hpp"
+
+// Excepción de errores de parsing
 struct ParserError : std::runtime_error {
-    ParserError(const std::string& msg): std::runtime_error(msg) {}
+    explicit ParserError(const std::string& msg)
+        : std::runtime_error(msg)
+    {}
 };
 
-// Función que lee TODO un istream y devuelve el AST
-AST parseProgram(std::istream& in);
+// Declara tu función parse (ajusta firma si era distinta)
+std::vector<std::unique_ptr<Node>> parse(std::istream& in);
+
+#endif // DDF_PARSER_HPP

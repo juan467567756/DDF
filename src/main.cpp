@@ -1,39 +1,29 @@
+#include <iostream>
+#include <memory>
+#include <vector>
 #include "ast.hpp"
 #include "parser.hpp"
-#include "utils.h"
-#include <iostream>
-#include <fstream>
 #include "semantic.hpp"
-
-
+#include "utils.hpp"
 
 int main(int argc, char* argv[]) {
-    // setup de streams (igual a v0.7)...
-    std::istream* in = &std::cin;
-    std::ifstream inFile;
-    // ... manejo de --input/--output si lo tienes
+    // Parseo de entrada (stdin o archivo según tu implementación)
+    auto ast = parse(std::cin);
 
-    try {
-        AST ast = parseProgram(*in);
-validateSemantics(ast);
-        for (auto& node : ast) {
-            if (auto b = dynamic_cast<BoxNode*>(node.get())) {
-                box(b->text);
-            } else if (dynamic_cast<ArrowNode*>(node.get())) {
-                arrow();
-            } else if (auto d = dynamic_cast<DecisionNode*>(node.get())) {
-                decision(d->condition);
-            } else if (dynamic_cast<ElseNode*>(node.get())) {
-                elseBranch();
-            } else if (auto l = dynamic_cast<LoopNode*>(node.get())) {
-                loopStart(l->label);
-            } else if (dynamic_cast<EndLoopNode*>(node.get())) {
-                loopEnd();
-            }
+    // Opcional: chequeo semántico
+    check_semantic(ast);
+
+    // Recorremos el AST e imprimimos según tipo
+    for (auto& node : ast) {
+        if (const BoxNode* b = dynamic_cast<const BoxNode*>(node.get())) {
+            std::cout << b->text << std::endl;
         }
-    } catch (const ParserError& e) {
-        std::cerr << "Error de sintaxis: " << e.what() << std::endl;
-        return 1;
+        else if (const DecisionNode* d = dynamic_cast<const DecisionNode*>(node.get())) {
+            std::cout << d->condition << std::endl;
+        }
+        else if (const LoopNode* l = dynamic_cast<const LoopNode*>(node.get())) {
+            std::cout << l->label << std::endl;
+        }
     }
 
     return 0;

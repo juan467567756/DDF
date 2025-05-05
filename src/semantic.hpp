@@ -1,10 +1,20 @@
-#pragma once
-#include "ast.hpp"
-#include <stdexcept>
+#ifndef DDF_SEMANTIC_HPP
+#define DDF_SEMANTIC_HPP
 
+#include <stdexcept>
+#include <string>
+#include <vector>
+#include <memory>
+#include "ast.hpp"
+
+// Excepción de errores semánticos
 struct SemanticError : std::runtime_error {
-  SemanticError(const std::string& msg): std::runtime_error(msg) {}
+    explicit SemanticError(const std::string& msg)
+        : std::runtime_error(msg)
+    {}
 };
 
-// Recorre el AST y verifica reglas semánticas
-void validateSemantics(const AST& ast);
+// Declara tu función de chequeo semántico
+void check_semantic(const std::vector<std::unique_ptr<Node>>& ast);
+
+#endif // DDF_SEMANTIC_HPP
