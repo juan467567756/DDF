@@ -57,15 +57,15 @@ jobs:
   docker:
     needs: build
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository with submodules
+      - name: Checkout repository
         uses: actions/checkout@v3
-        with:
-          submodules: recursive
 
       - name: Build Docker image
         run: docker build -t ddf-ci .
+
+      - name: Smoke test Docker container
+        run: docker run --rm ddf-ci --help
 
       - name: Smoke test Docker container
         run: docker run --rm ddf-ci --help
