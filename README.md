@@ -46,17 +46,22 @@ sudo make install
 
 ## Uso
 
-Ejecuta `ddf` y proporciona la descripción por stdin:
+### Interfaz de Línea de Comandos (CLI)
+
+Puedes especificar archivo de entrada, salida y formato:
 
 ```bash
-echo -e "BOX Iniciar\nARROW\nDECIDE ¿Continuar?\nBOX Fin" | ./ddf
-```
+# Leer desde archivo y mostrar ASCII
+ddf --input example1.txt --format ascii
 
-### Sintaxis del mini‑lenguaje
+# Generar diagrama Graphviz en archivo
+ddf --input example1.txt --output flowchart.dot --format dot
 
-* `BOX <texto>`: Crea un bloque de proceso con `<texto>`.
-* `ARROW`: Dibuja una flecha de conexión.
-* `DECIDE <texto>`: Crea un bloque de decisión con `<texto>`.
+# Usar stdin/stdout por defecto
+cat example1.txt | ddf
+
+# Ver ayuda
+ddf --help
 
 ## Ejemplo de salida
 
