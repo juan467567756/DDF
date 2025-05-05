@@ -1,0 +1,7 @@
+core_tests 0 0
+parser_tests 0 0
+semantic_tests 0 0
+---
+core_tests
+parser_tests
+semantic_tests
