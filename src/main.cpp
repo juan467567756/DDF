@@ -3,6 +3,9 @@
 #include "utils.h"
 #include <iostream>
 #include <fstream>
+#include "semantic.hpp"
+
+
 
 int main(int argc, char* argv[]) {
     // setup de streams (igual a v0.7)...
@@ -12,6 +15,7 @@ int main(int argc, char* argv[]) {
 
     try {
         AST ast = parseProgram(*in);
+validateSemantics(ast);
         for (auto& node : ast) {
             if (auto b = dynamic_cast<BoxNode*>(node.get())) {
                 box(b->text);

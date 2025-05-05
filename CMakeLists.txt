@@ -39,3 +39,9 @@ add_executable(test_parser ${TEST_PARSER_SRC} ${SRC})
 target_link_libraries(test_parser gtest_main)
 add_test(NAME parser_tests COMMAND test_parser)
 install(TARGETS test_parser DESTINATION bin)
+
+# --- Test de semántica ---
+file(GLOB TEST_SEMANTIC_SRC "tests/test_semantic.cpp")
+add_executable(test_semantic ${TEST_SEMANTIC_SRC} ${SRC})
+target_link_libraries(test_semantic gtest_main)
+add_test(NAME semantic_tests COMMAND test_semantic)
