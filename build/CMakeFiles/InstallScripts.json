@@ -1,0 +1,10 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/Users/Tuhue/DDF/build/cmake_install.cmake",
+		"C:/Users/Tuhue/DDF/build/extern/googletest/cmake_install.cmake",
+		"C:/Users/Tuhue/DDF/build/extern/googletest/googlemock/cmake_install.cmake",
+		"C:/Users/Tuhue/DDF/build/extern/googletest/googletest/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
