@@ -18,10 +18,7 @@ DDF es una herramienta de línea de comandos que convierte un mini‑lenguaje de
 * [Características](#características)
 * [Tecnologías](#tecnologías)
 * [Instalación](#instalación)
-* [Uso](#uso)
 
-  * [Sintaxis del mini‑lenguaje](#sintaxis-del-mini-lenguaje)
-  * [Ejemplos](#ejemplos)
 * [Contribuir](#contribuir)
 * [Licencia](#licencia)
 
@@ -43,39 +40,11 @@ DDF es una herramienta de línea de comandos que convierte un mini‑lenguaje de
 
 ```bash
 git clone https://github.com/juan467567756/DDF.git
-cd DDF
-mkdir build && cd build
-cmake ..
-make
-# Opcional: instalar globalmente
-sudo make install
+
 ```
-
-## Uso
-
-### Interfaz de Línea de Comandos (CLI)
-
-Puedes especificar archivo de entrada, salida y formato:
+-------------------------------
 
 ```bash
-# Leer desde archivo y mostrar ASCII
-ddf --input example1.txt --format ascii
-
-# Generar diagrama Graphviz en archivo
-ddf --input example1.txt --output flowchart.dot --format dot
-
-# Usar stdin/stdout por defecto
-cat example1.txt | ddf
-
-# Ver ayuda
-ddf --help
-
-## Ejemplo de salida
-
-```
------------------------
-```
-
 ## Contribuir
 
 ¡Contribuciones bienvenidas! Si quieres mejorar DDF:
@@ -89,8 +58,7 @@ ddf --help
 
 Este proyecto está bajo la **Licencia MIT**. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
-
 ```
-Ayudame un poco loco.  [![Patrociname❤️](https://img.shields.io/badge/Patrocinar-%E2%9D%A4-FE0000?logo=github)](https://github.com/sponsors/juan467567756)
 
-```  
+
+
