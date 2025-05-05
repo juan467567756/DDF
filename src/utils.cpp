@@ -3,13 +3,18 @@
 #include <string>
 #include <ostream>
 
+
 // Dibuja un recuadro ASCII alrededor de `text`
 void box(const std::string& text) {
-    std::string border(text.size() + 2, '-');
-    std::cout << "+" << border << "+" << "\n";
+    // Borde superior e inferior con el texto dentro
+    std::cout << "+-" << text << "-+" << "\n";
+    // Línea central
     std::cout << "| " << text << " |" << "\n";
-    std::cout << "+" << border << "+" << "\n";
+    // Repetimos el mismo borde
+    std::cout << "+-" << text << "-+" << "\n";
 }
+
+
 
 // Flecha hacia abajo
 void arrow() {
