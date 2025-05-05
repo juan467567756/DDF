@@ -16,6 +16,14 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Install static‑analysis tools
+        run: sudo apt-get update && sudo apt-get install -y cppcheck clang-tidy
+
+      - name: Static analysis (cppcheck & clang-tidy)
+        run: |
+          cppcheck --enable=all --inconclusive --error-exitcode=1 src
+          clang-tidy src/*.cpp -- -I src
+
       - name: Setup CMake
         run: sudo apt-get update && sudo apt-get install -y cmake
 
@@ -33,6 +41,7 @@ jobs:
   docker:
     needs: build
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository (with submodules)
         uses: actions/checkout@v3
