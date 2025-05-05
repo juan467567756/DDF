@@ -17,8 +17,7 @@ void arrow()
 void decision(const std::string& question)
 {
     box(question + " ?");
-    std::cout << " / \\\n"
-                 "v   v\n";
+    std::cout << " / \\" << "\n" << "v   v\n";
 }
 
 void loopStart(const std::string& label)
@@ -37,5 +36,23 @@ void elseBranch()
 {
     box("ELSE");
     arrow();
+}
+
+// Graphviz functions
+void dotHeader(std::ostream& out) {
+    out << "digraph Flow {\n";
+    out << "  node [shape=box];\n";
+}
+
+void dotFooter(std::ostream& out) {
+    out << "}\n";
+}
+
+void defineDotNode(std::ostream& out, const std::string& id, const std::string& label) {
+    out << "  " << id << " [label=\"" << label << "\"];\n";
+}
+
+void defineDotEdge(std::ostream& out, const std::string& from, const std::string& to) {
+    out << "  " << from << " -> " << to << ";\n";
 }
 
