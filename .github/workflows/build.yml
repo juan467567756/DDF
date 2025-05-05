@@ -11,7 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository (with submodules)
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
 
       - name: Setup CMake
         run: sudo apt-get update && sudo apt-get install -y cmake
@@ -28,11 +31,16 @@ jobs:
           ctest --verbose
 
   docker:
+    needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository (with submodules)
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
       - name: Build Docker image
         run: docker build -t ddf-ci .
+
       - name: Smoke Test Docker
         run: docker run --rm ddf-ci --help
-
