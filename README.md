@@ -31,13 +31,7 @@ DDF (Diagram Definition Format) is a lightweight C++17 tool that parses a simple
 ### Installation
 1. Clone the repo:  
    `git clone https://github.com/juan467567756/DDF.git`  
-2. Enter the folder and init submodules:  
-   `cd DDF && git submodule update --init --recursive`  
-3. Build:  
-   - Create a build directory and enter it: `mkdir build && cd build`  
-   - Configure and compile:  
-     `cmake -DCODE_COVERAGE=OFF ..`  
-     `cmake --build . --config Release`
+ :)
 
 ### Usage
 - **ASCII (default)**  
