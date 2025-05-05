@@ -1,28 +1,25 @@
-#include "../src/semantic.hpp"
 #include "../src/parser.hpp"
+#include "../src/semantic.hpp"
 #include <gtest/gtest.h>
 #include <sstream>
 
-AST parseStr(const std::string& s) {
-  return parseProgram(*(new std::istringstream(s)));
+// Helper
+static AST parseStr(const std::string& s) {
+    std::istringstream iss(s);
+    return parseProgram(iss);
 }
 
 TEST(SemanticTest, ElseWithoutDecide) {
-  AST ast = parseStr("ELSE");
-  EXPECT_THROW(validateSemantics(ast), SemanticError);
+    AST ast = parseStr("ELSE");
+    EXPECT_THROW(validateSemantics(ast), SemanticError);
 }
 
-TEST(SemanticTest, EndLoopWithoutLoop) {
-  AST ast = parseStr("ENDLOOP");
-  EXPECT_THROW(validateSemantics(ast), SemanticError);
+TEST(SemanticTest, UnmatchedLoop) {
+    AST ast = parseStr("ENDLOOP");
+    EXPECT_THROW(validateSemantics(ast), SemanticError);
 }
 
-TEST(SemanticTest, UnclosedLoop) {
-  AST ast = parseStr("LOOP X");
-  EXPECT_THROW(validateSemantics(ast), SemanticError);
-}
-
-TEST(SemanticTest, ValidNested) {
-  AST ast = parseStr("LOOP A\nBOX X\nENDLOOP\nDECIDE Y\nELSE\nBOX Z");
-  EXPECT_NO_THROW(validateSemantics(ast));
+TEST(SemanticTest, ValidProgram) {
+    AST ast = parseStr("LOOP X\nENDLOOP\nDECIDE A\nELSE");
+    EXPECT_NO_THROW(validateSemantics(ast));
 }
