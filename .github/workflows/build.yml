@@ -26,3 +26,13 @@ jobs:
         run: |
           cd build
           ctest --verbose
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build Docker image
+        run: docker build -t ddf-ci .
+      - name: Smoke Test Docker
+        run: docker run --rm ddf-ci --help
+
