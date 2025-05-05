@@ -5,6 +5,18 @@
 #include <iostream>
 
 int main(int argc, char* argv[]) {
+    for (int i = 1; i < argc; ++i) {
+        std::string a = argv[i];
+        if (a == "-h" || a == "--help") {
+            std::cout
+                << "Usage: ddf [--input <file>] [--output <file>] [--format <fmt>] [--help]\n"
+                << "  --input <file>    Lee el diagrama de <file> (por defecto stdin)\n"
+                << "  --output <file>   Escribe el resultado en <file> (por defecto stdout)\n"
+                << "  --format <fmt>    Elige formato: ascii o dot (por defecto ascii)\n"
+                << "  -h, --help        Muestra esta ayuda\n";
+            return 0;
+        }
+    }
     // 1) Abrir input (o stdin)
     std::istream* in = &std::cin;
     std::ifstream inFile;
