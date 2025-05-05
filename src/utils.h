@@ -1,7 +1,22 @@
+// -------- src/utils.h --------
 #pragma once
 #include <string>
 
-void box(const std::string& text);        // bloque rectangular
-void arrow();                             // flecha vertical
-void decision(const std::string& question); // bloque de decisión SÍ/NO
+// Dibuja un bloque rectangular con texto centrado
+void box(const std::string& text);
+
+// Flecha vertical hacia abajo
+void arrow();
+
+// Bloque de decisión (pregunta) con ramas SÍ / NO
+void decision(const std::string& question);
+
+// Inicio de bucle con etiqueta
+void loopStart(const std::string& label);
+
+// Fin de bucle
+void loopEnd();
+
+// Rama ELSE en decisiones anidadas
+void elseBranch();
 

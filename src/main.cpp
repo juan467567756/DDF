@@ -16,8 +16,15 @@ int main()
         } else if (line.rfind("DECIDE ", 0) == 0) {
             std::string question = line.substr(7);
             decision(question);
+        } else if (line.rfind("LOOP ", 0) == 0) {
+            std::string label = line.substr(5);
+            loopStart(label);
+        } else if (line == "ENDLOOP") {
+            loopEnd();
+        } else if (line == "ELSE") {
+            elseBranch();
         } else if (line.rfind("COMMENT ", 0) == 0) {
-            // permitir comentarios en la entrada
+            // ignorar comentarios
             continue;
         } else if (line.empty()) {
             continue;
@@ -27,3 +34,5 @@ int main()
     }
     return 0;
 }
+
+

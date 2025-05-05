@@ -20,3 +20,22 @@ void decision(const std::string& question)
     std::cout << " / \\\n"
                  "v   v\n";
 }
+
+void loopStart(const std::string& label)
+{
+    box("LOOP: " + label);
+    arrow();
+}
+
+void loopEnd()
+{
+    box("END LOOP");
+    arrow();
+}
+
+void elseBranch()
+{
+    box("ELSE");
+    arrow();
+}
+
