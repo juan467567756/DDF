@@ -1,3 +1,4 @@
+// -------- src/utils.h --------
 #pragma once
 #include <string>
 #include <ostream>
@@ -16,12 +17,8 @@ void loopEnd();
 void elseBranch();
 
 // --- Graphviz (.dot) output ---
-// Escribe cabecera de un grafo dirigido
 void dotHeader(std::ostream& out);
-// Escribe cierre de grafo
 void dotFooter(std::ostream& out);
-// Agrega un nodo con etiqueta
-defineDotNode(std::ostream& out, const std::string& id, const std::string& label);
-// Agrega una arista de id_from a id_to
-defineDotEdge(std::ostream& out, const std::string& from, const std::string& to);
+void defineDotNode(std::ostream& out, const std::string& id, const std::string& label);
+void defineDotEdge(std::ostream& out, const std::string& from, const std::string& to);
 

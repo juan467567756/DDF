@@ -1,44 +1,37 @@
 #include "utils.h"
 #include <iostream>
 
-void box(const std::string& text)
-{
+void box(const std::string& text) {
     std::string line(text.size(), '-');
     std::cout << "+-" << line << "-+\n";
     std::cout << "| "  << text << " |\n";
     std::cout << "+-" << line << "-+\n";
 }
 
-void arrow()
-{
+void arrow() {
     std::cout << "  |\n  v\n";
 }
 
-void decision(const std::string& question)
-{
+void decision(const std::string& question) {
     box(question + " ?");
     std::cout << " / \\" << "\n" << "v   v\n";
 }
 
-void loopStart(const std::string& label)
-{
+void loopStart(const std::string& label) {
     box("LOOP: " + label);
     arrow();
 }
 
-void loopEnd()
-{
+void loopEnd() {
     box("END LOOP");
     arrow();
 }
 
-void elseBranch()
-{
+void elseBranch() {
     box("ELSE");
     arrow();
 }
 
-// Graphviz functions
 void dotHeader(std::ostream& out) {
     out << "digraph Flow {\n";
     out << "  node [shape=box];\n";
@@ -55,4 +48,5 @@ void defineDotNode(std::ostream& out, const std::string& id, const std::string& 
 void defineDotEdge(std::ostream& out, const std::string& from, const std::string& to) {
     out << "  " << from << " -> " << to << ";\n";
 }
+
 
