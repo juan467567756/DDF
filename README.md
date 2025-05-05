@@ -1,6 +1,12 @@
+<!-- Build status -->
 ![Build & Test DDF](https://github.com/juan467567756/DDF/actions/workflows/build.yml/badge.svg)
+
+<!-- Licencia MIT -->
+![License: MIT](https://img.shields.io/github/license/juan467567756/DDF)
+
+<!-- Última versión -->
 ![Release](https://img.shields.io/github/v/release/juan467567756/DDF)
-![License](https://img.shields.io/github/license/juan467567756/DDF)
+
 
 # DDF: Generador de Diagramas de Flujo en ASCII
 
