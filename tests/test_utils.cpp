@@ -12,7 +12,7 @@ std::string captureBox(const std::string& text) {
 }
 
 TEST(UtilsTest, BoxFramesText) {
-    std::string out = captureBox("Test");
-    EXPECT_NE(out.find("+-----+"), std::string::npos);
-    EXPECT_NE(out.find("| Test |"), std::string::npos);
+    std::string out = captureBox("X");
+    EXPECT_NE(out.find("+-X-+"), std::string::npos);
+    EXPECT_NE(out.find("| X |"), std::string::npos);
 }
