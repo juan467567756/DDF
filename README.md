@@ -1,74 +1,110 @@
-<!-- Build status -->
+# DDF
+
 ![Build & Test DDF](https://github.com/juan467567756/DDF/actions/workflows/build.yml/badge.svg)
-<!-- Licencia MIT -->
+![Coverage Status](https://codecov.io/gh/juan467567756/DDF/branch/main/graph/badge.svg)
 ![License: MIT](https://img.shields.io/github/license/juan467567756/DDF)
-<!-- Última versión -->
 ![Release](https://img.shields.io/github/v/release/juan467567756/DDF)
-<!-- Coverage -->
-[![Coverage Status](https://codecov.io/gh/juan467567756/DDF/branch/main/graph/badge.svg)](https://codecov.io/gh/juan467567756/DDF)
 
+---
 
+## English
 
-# DDF: Generador de Diagramas de Flujo en ASCII
+### Description
+DDF (Diagram Definition Format) is a lightweight C++17 tool that parses a simple DSL into flow diagrams. It supports ASCII art output and Graphviz (“.dot”) files.
 
-DDF es una herramienta de línea de comandos que convierte un mini‑lenguaje de descripción de diagramas de flujo en arte ASCII. Ideal para documentar procesos en terminales, documentación técnica y tutoriales.
+### Features
+- **Parse & Render**  
+  Commands: `BOX`, `ARROW`, `DECIDE`, `ELSE`, `LOOP`, `ENDLOOP`  
+  Outputs: terminal ASCII diagrams or `.dot` files for Graphviz  
+- **Syntax & Semantic Validation**  
+  Catches unknown keywords, missing text, unclosed loops, and `ELSE` without `DECIDE`.  
+- **Flexible CLI**  
+  `ddf [--input <file>] [--output <file>] [--format <ascii|dot>] [--help]`  
+- **Automated Testing & CI**  
+  - GoogleTest suites: core_tests, parser_tests, semantic_tests  
+  - Static analysis with cppcheck & clang-tidy  
+  - Code coverage via lcov + Codecov  
+  - GitHub Actions pipeline with build, tests, coverage and Docker smoke test  
+- **Cross-Platform Releases**  
+  Prebuilt Linux, macOS, and Windows binaries published on GitHub Releases.
 
-## Tabla de Contenidos
+### Installation
+1. Clone the repo:  
+   `git clone https://github.com/juan467567756/DDF.git`  
+2. Enter the folder and init submodules:  
+   `cd DDF && git submodule update --init --recursive`  
+3. Build:  
+   - Create a build directory and enter it: `mkdir build && cd build`  
+   - Configure and compile:  
+     `cmake -DCODE_COVERAGE=OFF ..`  
+     `cmake --build . --config Release`
 
-* [Características](#características)
-* [Tecnologías](#tecnologías)
-* [Instalación](#instalación)
+### Usage
+- **ASCII (default)**  
+  `printf "BOX Start\nARROW\nBOX End\n" | build/ddf`  
+- **Graphviz (.dot)**  
+  `build/ddf --input flow.txt --output flow.dot --format dot`  
+  then `dot -Tpng flow.dot -o flow.png`  
+- **Help**  
+  `ddf --help`
 
-* [Contribuir](#contribuir)
-* [Licencia](#licencia)
+### Contributing
+See CONTRIBUTING.md and CODE_OF_CONDUCT.md for guidelines.
 
-## Características
+### License
+MIT License (see LICENSE file)
 
-* **Parser** de mini‑lenguaje desde stdin (`BOX`, `ARROW`, `DECIDE`)
-* **Generación** de bloques ASCII reutilizables (`box`, `arrow`, `decision`)
-* **Estructura modular** en C++ con `utils.h` / `utils.cpp`
-* **Integración continua** con GitHub Actions
+### Technologies
+C++17 · CMake · GoogleTest · cppcheck · clang-tidy · GitHub Actions · lcov/Codecov · Docker · Graphviz · GitHub Pages
 
-## Tecnologías
+---
 
-## Tecnologías
+## Español
 
-- **Lenguaje**: C++17  
-- **Sistema de build**: CMake (con soporte a flags de cobertura)  
-- **Tests unitarios**: GoogleTest  
-- **Análisis estático**: cppcheck, clang-tidy  
-- **Integración continua**: GitHub Actions  
-  - Build, tests, cobertura con lcov  
-  - Publicación de cobertura en Codecov  
-  - Construcción y smoke-test de imagen Docker  
-- **Cobertura de código**: lcov + Codecov  
-- **Contenerización**: Docker multi-stage  
-- **Visualización**: Graphviz (`.dot`)  
-- **Documentación viva**: GitHub Pages (directorio `docs/`)  
+### Descripción
+DDF (Diagram Definition Format) es una herramienta en C++17 para convertir un DSL sencillo en diagramas de flujo. Soporta salida ASCII en terminal y archivos Graphviz (`.dot`).
 
-## Instalación
+### Características
+- **Parseo y Renderizado**  
+  Comandos: `BOX`, `ARROW`, `DECIDE`, `ELSE`, `LOOP`, `ENDLOOP`  
+  Salidas: ASCII art en la terminal o archivos `.dot`  
+- **Validación Sintáctica y Semántica**  
+  Detecta keywords desconocidas, texto faltante, bucles sin cerrar y `ELSE` sin `DECIDE`.  
+- **CLI Flexible**  
+  `ddf [--input <archivo>] [--output <archivo>] [--format <ascii|dot>] [--help]`  
+- **Pruebas Automáticas y CI**  
+  - Suites GoogleTest: core_tests, parser_tests, semantic_tests  
+  - Análisis estático con cppcheck y clang-tidy  
+  - Cobertura con lcov + Codecov  
+  - Pipeline en GitHub Actions para build, tests, cobertura y smoke test en Docker  
+- **Releases Multiplataforma**  
+  Binarios listos para Linux, macOS y Windows en GitHub Releases.
 
-```bash
-git clone https://github.com/juan467567756/DDF.git
+### Instalación
+1. Clona el repositorio:  
+   `git clone https://github.com/juan467567756/DDF.git`  
+2. Entra en la carpeta e inicializa submódulos:  
+   `cd DDF && git submodule update --init --recursive`  
+3. Compila:  
+   - Crea y entra en build: `mkdir build && cd build`  
+   - Configura y compila:  
+     `cmake -DCODE_COVERAGE=OFF ..`  
+     `cmake --build . --config Release`
 
-```
--------------------------------
+### Uso
+- **ASCII (por defecto)**  
+  `printf "BOX Inicio\nARROW\nBOX Fin\n" | build/ddf`  
+- **Graphviz (.dot)**  
+  `build/ddf --input diagrama.txt --output diagrama.dot --format dot`  
+  luego `dot -Tpng diagrama.dot -o diagrama.png`  
+- **Ayuda**  
+  `ddf --help`
 
-```bash
-## Contribuir
+### Contribuir
+Consulta CONTRIBUTING.md y CODE_OF_CONDUCT.md.
 
-¡Contribuciones bienvenidas! Si quieres mejorar DDF:
+### Licencia
+MIT License (ver archivo LICENSE)
 
-1. Haz un fork del repositorio.
-2. Crea tu branch: `git checkout -b feature/nombre-feature`
-3. Realiza tus cambios y haz commits descriptivos.
-4. Envía un pull request.
-
-## Licencia
-
-Este proyecto está bajo la **Licencia MIT**. Consulta el archivo [LICENSE](LICENSE) para más detalles.
-
-```
-
-
-
+### Tecnologías
+C++17 · CMake · GoogleTest · cppcheck · clang-tidy · GitHub Actions · lcov/Codecov · Docker · Graphviz · GitHub Pages
