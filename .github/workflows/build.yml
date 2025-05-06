@@ -40,10 +40,10 @@ jobs:
           cd build
           ctest --output-on-failure
 
-      - name: Capture coverage
+        - name: Capture coverage
         run: |
           cd build
-          geninfo . --output-filename coverage.info --ignore-errors empty --memory 0
+          geninfo . --output-filename coverage.info --ignore-errors empty,mismatch --memory 0
           lcov --remove coverage.info '/usr/*' --output-file coverage.info
 
       - name: Upload coverage to Codecov
