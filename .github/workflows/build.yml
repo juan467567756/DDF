@@ -1,5 +1,3 @@
-
-# CI workflow for building, testing, and measuring coverage
 name: Build, Test & Coverage DDF
 
 on:
@@ -13,37 +11,43 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository with submodules
+      - name: Checkout repository (with submodules)
         uses: actions/checkout@v3
         with:
           submodules: recursive
 
-      - name: Install required tools
+      - name: Install required tools & Pistache
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake cppcheck clang-tidy lcov
+          sudo apt-get install -y cmake cppcheck clang-tidy lcov libpistache-dev
 
       - name: Run static analysis
         run: |
           cppcheck --enable=all --inconclusive --suppress=missingIncludeSystem --suppress=missingInclude src || true
           clang-tidy src/*.cpp -- -I src
 
-      - name: Configure and build with coverage
+      - name: Configure & build with coverage
         run: |
           mkdir build
           cd build
           cmake -DCODE_COVERAGE=ON ..
-          make
+          cmake --build . --config Release
 
       - name: Run unit and semantic tests
         run: |
           cd build
-          ctest --output-on-failure
+          ctest -C Release --output-on-failure
+
+      - name: REST API smoke test
+        run: |
+          cd build
+          # Arranca el servidor en background, espera 2s y prueba endpoint
+          ./ddf_server & sleep 2
+          curl -d "BOX X\nARROW\nBOX Y" http://localhost:9080/ | grep "+-X-+"
 
       - name: Capture coverage data
         run: |
           cd build
-          # Capture coverage; ignore if no data generated
           lcov --directory . --capture --output-file coverage.info --ignore-errors empty || true
           lcov --remove coverage.info '/usr/*' 'extern/*' --output-file coverage.info || true
           lcov --list coverage.info || true
@@ -57,15 +61,11 @@ jobs:
   docker:
     needs: build
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
       - name: Build Docker image
         run: docker build -t ddf-ci .
-
-      - name: Smoke test Docker container
-        run: docker run --rm ddf-ci --help
-
       - name: Smoke test Docker container
         run: docker run --rm ddf-ci --help
