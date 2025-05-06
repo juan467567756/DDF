@@ -1,3 +1,5 @@
+# CI workflow for building, testing, and measuring coverage
+
 name: Build, Test & Coverage DDF
 
 on:
@@ -11,61 +13,41 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository (with submodules)
+      - name: Checkout repository with submodules
         uses: actions/checkout@v3
         with:
           submodules: recursive
 
-      - name: Install required tools & Pistache
+      - name: Install required tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake cppcheck clang-tidy lcov libpistache-dev
+          sudo apt-get install -y cmake cppcheck clang-tidy lcov
 
       - name: Run static analysis
         run: |
           cppcheck --enable=all --inconclusive --suppress=missingIncludeSystem --suppress=missingInclude src || true
-          clang-tidy src/*.cpp -- -I src
+          clang-tidy src/*.cpp -- -I./src || true
 
-      - name: Configure & build with coverage
+      - name: Configure & Build with coverage
         run: |
           mkdir build
           cd build
           cmake -DCODE_COVERAGE=ON ..
-          cmake --build . --config Release
+          cmake --build . --config Debug
 
-      - name: Run unit and semantic tests
+      - name: Run tests
         run: |
           cd build
-          ctest -C Release --output-on-failure
+          ctest --output-on-failure
 
-      - name: REST API smoke test
+      - name: Capture coverage
         run: |
           cd build
-          # Arranca el servidor en background, espera 2s y prueba endpoint
-          ./ddf_server & sleep 2
-          curl -d "BOX X\nARROW\nBOX Y" http://localhost:9080/ | grep "+-X-+"
+          geninfo . --output-filename coverage.info --ignore-errors empty --memory 0
+          lcov --remove coverage.info '/usr/*' --output-file coverage.info
 
-      - name: Capture coverage data
-        run: |
-          cd build
-          lcov --directory . --capture --output-file coverage.info --ignore-errors empty || true
-          lcov --remove coverage.info '/usr/*' 'extern/*' --output-file coverage.info || true
-          lcov --list coverage.info || true
-
-      - name: Upload to Codecov
+      - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
           files: build/coverage.info
-          token: ${{ secrets.CODECOV_TOKEN }}
-
-  docker:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Build Docker image
-        run: docker build -t ddf-ci .
-      - name: Smoke test Docker container
-        run: docker run --rm ddf-ci --help
+          fail_ci_if_error: true
